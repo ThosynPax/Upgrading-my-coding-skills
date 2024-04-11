@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Game</title>
+  <style>
+    body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.game-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #000;
+}
+
+.snake, .food {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #333;
+}
+
+.food {
+  background-color: red;
+}
+
+.score {
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Snake Game</h1>
+    <div class="game-container">
+      <div class="snake" id="snake"></div>
+      <div class="food" id="food"></div>
+    </div>
+    <div class="score" id="score">Score: <span id="score-value">0</span></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const gameContainer = document.querySelector('.game-container');
+  const snakeElement = document.getElementById('snake');
+  const foodElement = document.getElementById('food');
+  const scoreValueElement = document.getElementById('score-value');
+
+  const gridWidth = 30;
+  const gridHeight = 30;
+  const cellSize = 10;
+  const initialSnakeLength = 5;
+  const snakeSpeed = 150;
+
+  let snake = [{ x: 10, y: 10 }];
+  let food = { x: 0, y: 0 };
+  let direction = 'right';
+  let score = 0;
+
+  function getRandomCoordinate() {
+    return Math.floor(Math.random() * gridWidth);
+  }
+
+  function createFood() {
+    food.x = getRandomCoordinate();
+    food.y = getRandomCoordinate();
+
+    // Ensure the food doesn't appear on the snake
+    while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
+      food.x = getRandomCoordinate();
+      food.y = getRandomCoordinate();
+    }
+
+    foodElement.style.left = `${food.x * cellSize}px`;
+    foodElement.style.top = `${food.y * cellSize}px`;
+  }
+
+  function moveSnake() {
+    const head = { ...snake[0] };
+
+    switch (direction) {
+      case 'up':
+        head.y -= 1;
+        break;
+      case 'down':
+        head.y += 1;
+        break;
+      case 'left':
+        head.x -= 1;
+        break;
+      case 'right':
+        head.x += 1;
+        break;
+    }
+
+    // Check if the snake has collided with itself or the walls
+    if (
+      head.x < 0 ||
+      head.x >= gridWidth ||
+      head.y < 0 ||
+      head.y >= gridHeight ||
+      snake.some(segment => segment.x === head.x && segment.y === head.y)
+    ) {
+      gameOver();
+      return;
+    }
+
+    snake.unshift(head);
+
+    // Check if the snake has eaten the food
+    if (head.x === food.x && head.y === food.y) {
+      score++;
+      scoreValueElement.textContent = score;
+      createFood();
+    } else {
+      snake.pop();
+    }
+
+    renderSnake();
+  }
+
+  function renderSnake() {
+    snakeElement.innerHTML = '';
+
+    snake.forEach(segment => {
+      const segmentElement = document.createElement('div');
+      segmentElement.style.left = `${segment.x * cellSize}px`;
+      segmentElement.style.top = `${segment.y * cellSize}px`;
+      segmentElement.classList.add('snake-segment');
+      snakeElement.appendChild(segmentElement);
+    });
+  }
+
+  function changeDirection(event) {
+    const key = event.key;
+    if (key === 'ArrowUp' && direction !== 'down') {
+      direction = 'up';
+    } else if (key === 'ArrowDown' && direction !== 'up') {
+      direction = 'down';
+    } else if (key === 'ArrowLeft' && direction !== 'right') {
+      direction = 'left';
+    } else if (key === 'ArrowRight' && direction !== 'left') {
+      direction = 'right';
+    }
+  }
+
+  function gameOver() {
+    alert(`Game Over! Your score is ${score}`);
+    resetGame();
+  }
+
+  function resetGame() {
+    snake = [{ x: 10, y: 10 }];
+    direction = 'right';
+    score = 0;
+    scoreValueElement.textContent = score;
+    createFood();
+  }
+
+  createFood();
+  setInterval(moveSnake, snakeSpeed);
+  document.addEventListener('keydown', changeDirection);
+});
+
+  </script>
+</body>
+</html>
