@@ -1,0 +1,49 @@
+<style>
+  /* Background Container */
+  .background-container {
+   display: none;
+  }
+
+  /* Background Video */
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+  }
+
+  /* Overlay Image */
+  .overlay-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .background-container {
+      display: block;
+      position: relative;
+    width: 100%;
+    height: 70vh;
+    overflow: hidden;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="background-container">
+  <!-- Background Video -->
+  <video controls="controls background-video" style=" height: auto;">
+    <source src="https://cdn.shopify.com/videos/c/o/v/4bce927f0681461190fe0a9cac2e9a9c.mp4" type="video/mp4" />
+  Your browser does not support our video.
+  </video>
+
+  <!-- Overlay Image -->
+  <img src="https://cdn.shopify.com/s/files/1/0758/4995/7720/files/White_Side_Logo_1.png?v=1714136993" alt="Overlay Image" class="overlay-image">
+</div>

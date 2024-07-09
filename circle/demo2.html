@@ -1,0 +1,238 @@
+<style>
+    /* Marquee styles */
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      background-color: black;
+      color: white;
+      white-space: nowrap;
+      padding: 10px;
+      margin-top: -50px;
+    }
+  
+    .marquee-content {
+      display: inline-block;
+      padding-right: 50px;
+      position: relative;
+    }
+  
+    .marquee-content::after {
+      content: " \2605";
+      position: absolute;
+      padding-right: 10px;
+      right: 0;
+      top: 0;
+    }
+  
+    .marquee-wrapper {
+      display: inline-block;
+      animation: marquee 15s linear infinite;
+    }
+  
+    .marquee-wrapper:hover {
+      animation-play-state: paused;
+    }
+  
+    .marquee-wrapper:hover .marquee-content:nth-child(even) {
+      animation-play-state: running;
+    }
+  
+    @keyframes marquee {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  
+    /* Background styles */
+    .background-image {
+      background-image: url('https://cdn.shopify.com/s/files/1/0758/4995/7720/files/TOPLAGY_INDOSSATO__523_copia.jpg?v=1714126270');
+      background-size: cover;
+      background-position: center 20%;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin-top: 0;
+      width: 100%;
+      height: 800px;
+    }
+  
+    .button {
+      width: 300px;
+      height: 50px;
+    }
+  
+    /* Custom footer styles */
+    .custom-footer {
+      color: #000;
+      font-size: small;
+      padding: 10px;
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      bottom: -50px;
+    }
+  
+  
+    @media (max-width: 768px) {
+      .background-image {
+        background-size: 130vh;
+        height: 100vh;
+        background-position: center;
+        margin-top: -150px;
+        margin-bottom: -185px;
+        position: relative;
+        z-index: 0;
+      }
+  
+      .gradient {
+        background: transparent;
+      }
+  
+      .marquee {
+        margin-top: 10px;
+        position: relative;
+        z-index: 1;
+        top: -45px;
+        z-index: 2;
+      }
+  
+      .button-container {
+        display: block;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-bottom: 20px;
+        z-index: 1;
+      }
+  
+      .button {
+        width: 190px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin: 10px 0;
+        border: none !important;
+        border-radius: none !important;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        z-index: 1;
+      }
+  
+      .button-one:hover {
+        background-color: #fff !important;
+        color: #000 !important;
+      }
+  
+      .button-one {
+        background-color: transparent;
+        color: #fff !important;
+        border: 1px solid #fff !important;
+      }
+  
+      .button-two {
+        background-color: #FFF;
+        font-weight: bold;
+        color: #000;
+      }
+  
+      .button-two:hover {
+        background-color: #000;
+        color: #fff;
+      }
+  
+      .marquee-content {
+        display: inline-block;
+        position: relative;
+      }
+  
+      .marquee-content::after {
+        content: " \2605";
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+  
+      .marquee-second {
+        display: none;
+      }
+  
+      .custom-footer {
+        color: #000;
+        font-size: small;
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+      }
+    }
+  
+    .button-one {
+      background-color: transparent;
+      color: #000;
+    }
+  
+    .button-two {
+      background-color: #FFF;
+      font-weight: bold;
+      color: #000;
+    }
+  
+    .button-one:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  
+    .button-two:hover {
+      background-color: #000;
+      font-weight: bold;
+      color: #fff;
+    }
+  
+    /* Hide all footers on the page */
+    footer {
+      display: none !important;
+    }
+  
+    /* Show only the main footer */
+    main footer {
+      display: block !important;
+    }
+  </style>
+  
+  <div class="marquee">
+  <div class="marquee-wrapper">
+    <div class="marquee-content">Crafted with Care</div>
+    <div class="marquee-content marquee-second">Elegant</div>
+    <div class="marquee-content">Rich Heritage</div>
+    <div class="marquee-content marquee-second">This is the life</div>
+    <!-- Duplicate marquee content with class "marquee-second" -->
+    <div class="marquee-content ">Crafted with Care</div>
+    <div class="marquee-content marquee-second">Elegant</div>
+    <div class="marquee-content">Rich Heritage</div>
+    <div class="marquee-content marquee-second">This is the life</div>
+  </div>
+  </div>
+  
+  
+  <div class="background-image">
+  <div class="button-container">
+    <a href="https://toplagy.eu/pages/our-story" class="button button-one">OUR STORY</a>
+    <a href="https://toplagy.eu/pages/our-shop" class="button button-two">SHOP</a>
+  </div>
+  <div class="custom-footer">
+    © 2024 Toplagy
+  </div>
+  </div>

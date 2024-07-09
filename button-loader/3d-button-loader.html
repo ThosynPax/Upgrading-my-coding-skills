@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Button, Loader, and Success Message</title>
+    <style>
+                body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 4px #0056b3, 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .button:active {
+            box-shadow: 0 2px #0056b3, 0 3px 10px rgba(0, 0, 0, 0.1);
+            transform: translateY(2px);
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid red;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            font-size: 18px;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button id="actionButton" class="button">Submit</button>
+        <div id="loader" class="loader"></div>
+        <div id="successMessage" class="success-message">Success</div>
+    </div>
+    <script>
+        document.getElementById('actionButton').addEventListener('click', function() {
+            var button = document.getElementById('actionButton');
+            var loader = document.getElementById('loader');
+            var successMessage = document.getElementById('successMessage');
+            
+            button.style.display = 'none';
+            loader.style.display = 'block';
+            
+            setTimeout(function() {
+                loader.style.display = 'none';
+                successMessage.style.display = 'block';
+            }, 3000); 
+        });
+    </script>
+    
+</body>
+</html>
